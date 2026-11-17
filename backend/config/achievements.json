@@ -1,0 +1,16 @@
+{
+  "_comment": "Metrics: total_activations, best_combo, distinct_jutsu, trained_signs, total_score.",
+  "achievements": [
+    { "id": "first_spark", "name": "First Spark", "description": "Activate your first jutsu.", "icon": "sparkles", "metric": "total_activations", "threshold": 1 },
+    { "id": "seasoned_caster", "name": "Seasoned Caster", "description": "Activate 10 jutsu.", "icon": "flame", "metric": "total_activations", "threshold": 10 },
+    { "id": "arena_veteran", "name": "Arena Veteran", "description": "Activate 50 jutsu.", "icon": "swords", "metric": "total_activations", "threshold": 50 },
+    { "id": "chain_caster", "name": "Chain Caster", "description": "Reach a combo of 3 without an incorrect sequence.", "icon": "link", "metric": "best_combo", "threshold": 3 },
+    { "id": "unbroken_flow", "name": "Unbroken Flow", "description": "Reach a combo of 5.", "icon": "waves", "metric": "best_combo", "threshold": 5 },
+    { "id": "perfect_focus", "name": "Perfect Focus", "description": "Reach a combo of 10.", "icon": "target", "metric": "best_combo", "threshold": 10 },
+    { "id": "versatile", "name": "Versatile", "description": "Activate 4 different jutsu.", "icon": "shapes", "metric": "distinct_jutsu", "threshold": 4 },
+    { "id": "grand_master", "name": "Grand Master", "description": "Activate 8 different jutsu.", "icon": "crown", "metric": "distinct_jutsu", "threshold": 8 },
+    { "id": "apprentice_of_signs", "name": "Apprentice of Signs", "description": "Train the model to recognise 3 hand signs.", "icon": "hand", "metric": "trained_signs", "threshold": 3 },
+    { "id": "keeper_of_the_twelve", "name": "Keeper of the Twelve", "description": "Train the model to recognise all 12 hand signs.", "icon": "scroll", "metric": "trained_signs", "threshold": 12 },
+    { "id": "rising_power", "name": "Rising Power", "description": "Earn 5,000 total points.", "icon": "trending-up", "metric": "total_score", "threshold": 5000 }
+  ]
+}

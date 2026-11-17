@@ -1,0 +1,691 @@
+{
+  "_comment": "The twelve hand-sign categories. 'diagram' drives the schematic shown in the app: each hand lists the state of thumb, index, middle, ring, pinky as 'up' (extended), 'fold' (curled) or 'lock' (interlocked with the other hand). 'recognition' configures the built-in recogniser that works without training: finger states come from the diagram (hand 'left' = role a, 'right' = role b; the two detected hands are matched to the roles whichever way fits best), and 'rules' are soft conditions on named pose features (see app/computer_vision/pose.py) - 'min'/'max' with a 'soft' margin and a 'weight'. An optional 'threshold' overrides the default confidence needed (0.62, adjusted by the recognition mode). The poses are game-defined guides based on commonly shown references; edit them freely.",
+  "signs": [
+    {
+      "id": "rat",
+      "name": "Rat",
+      "kanji": "子",
+      "order": 1,
+      "description": "A compact grip: one hand wraps the raised fingers of the other.",
+      "how_to": [
+        "Raise the index and middle fingers of your left hand, curling the rest.",
+        "Wrap your right hand around those two fingers.",
+        "Keep the right index and middle fingers pointing up alongside them."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "fold",
+          "up",
+          "up",
+          "fold",
+          "fold"
+        ],
+        "right": [
+          "up",
+          "up",
+          "up",
+          "fold",
+          "fold"
+        ],
+        "layout": "wrapped",
+        "caption": "Right hand grips the left hand's raised fingers"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "a_above_b",
+            "label": "Gripping hand sits above the base hand",
+            "weight": 2.0,
+            "soft": 0.35,
+            "min": -1.7,
+            "max": -0.35
+          },
+          {
+            "feature": "palm_distance",
+            "label": "Hands touching",
+            "weight": 1.0,
+            "soft": 0.6,
+            "max": 1.7
+          }
+        ]
+      }
+    },
+    {
+      "id": "ox",
+      "name": "Ox",
+      "kanji": "丑",
+      "order": 2,
+      "description": "Two open hands crossed at right angles.",
+      "how_to": [
+        "Hold your left hand upright with the fingers together.",
+        "Lay your right hand horizontally across it, fingers extended.",
+        "Keep both palms open and the cross clearly visible to the camera."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "up",
+          "up",
+          "up",
+          "up",
+          "up"
+        ],
+        "right": [
+          "up",
+          "up",
+          "up",
+          "up",
+          "up"
+        ],
+        "layout": "crossed",
+        "caption": "Right hand horizontal across the upright left hand"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "axis_cross",
+            "label": "Hands crossed at right angles",
+            "weight": 2.5,
+            "soft": 0.3,
+            "min": 0.6
+          },
+          {
+            "feature": "a.axis_up",
+            "label": "One hand upright",
+            "weight": 1.0,
+            "soft": 0.35,
+            "min": 0.55
+          },
+          {
+            "feature": "b.horizontal",
+            "label": "Other hand horizontal",
+            "weight": 1.0,
+            "soft": 0.3,
+            "min": 0.7
+          },
+          {
+            "feature": "palm_distance",
+            "label": "Hands overlapping",
+            "weight": 1.0,
+            "soft": 0.6,
+            "max": 1.3
+          }
+        ]
+      }
+    },
+    {
+      "id": "tiger",
+      "name": "Tiger",
+      "kanji": "寅",
+      "order": 3,
+      "description": "Hands clasped with both index fingers and thumbs raised together.",
+      "how_to": [
+        "Clasp your hands, interlocking the middle, ring and little fingers.",
+        "Extend both index fingers upward and press them together.",
+        "Raise both thumbs side by side."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "up",
+          "up",
+          "lock",
+          "lock",
+          "lock"
+        ],
+        "right": [
+          "up",
+          "up",
+          "lock",
+          "lock",
+          "lock"
+        ],
+        "layout": "clasped",
+        "caption": "Clasped hands, index fingers and thumbs raised"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "palm_distance",
+            "label": "Hands clasped together",
+            "weight": 1.5,
+            "soft": 0.5,
+            "max": 0.85
+          },
+          {
+            "feature": "tip_distance.index",
+            "label": "Index fingertips together",
+            "weight": 1.5,
+            "soft": 0.4,
+            "max": 0.5
+          },
+          {
+            "feature": "a.finger_up.index",
+            "label": "Index fingers point up",
+            "weight": 0.8,
+            "soft": 0.4,
+            "min": 0.5
+          },
+          {
+            "feature": "b.finger_up.index",
+            "label": "Index fingers point up",
+            "weight": 0.8,
+            "soft": 0.4,
+            "min": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "rabbit",
+      "name": "Rabbit",
+      "kanji": "卯",
+      "order": 4,
+      "description": "An open L-shape on one hand with the other hand's little finger raised.",
+      "how_to": [
+        "Point your left index finger up and extend the thumb, curling the rest.",
+        "Make a fist with your right hand and raise only the little finger.",
+        "Bring the right hand in front of the left palm."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "up",
+          "up",
+          "fold",
+          "fold",
+          "fold"
+        ],
+        "right": [
+          "fold",
+          "fold",
+          "fold",
+          "fold",
+          "up"
+        ],
+        "layout": "side",
+        "caption": "Left index and thumb out, right little finger raised"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "palm_distance",
+            "label": "Hands close together",
+            "weight": 0.7,
+            "soft": 0.8,
+            "max": 1.8
+          }
+        ]
+      }
+    },
+    {
+      "id": "dragon",
+      "name": "Dragon",
+      "kanji": "辰",
+      "order": 5,
+      "description": "Interlocked hands with the little fingers and thumbs extended.",
+      "how_to": [
+        "Clasp your hands, interlocking the index, middle and ring fingers.",
+        "Extend both little fingers and touch their tips.",
+        "Press the thumbs together on top."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "up",
+          "lock",
+          "lock",
+          "lock",
+          "up"
+        ],
+        "right": [
+          "up",
+          "lock",
+          "lock",
+          "lock",
+          "up"
+        ],
+        "layout": "clasped",
+        "caption": "Clasped hands, little fingers and thumbs extended"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "palm_distance",
+            "label": "Hands clasped together",
+            "weight": 1.2,
+            "soft": 0.5,
+            "max": 1.0
+          },
+          {
+            "feature": "tip_distance.pinky",
+            "label": "Little fingertips together",
+            "weight": 1.5,
+            "soft": 0.45,
+            "max": 0.55
+          },
+          {
+            "feature": "tip_distance.thumb",
+            "label": "Thumbs together",
+            "weight": 0.7,
+            "soft": 0.45,
+            "max": 0.6
+          }
+        ]
+      }
+    },
+    {
+      "id": "snake",
+      "name": "Snake",
+      "kanji": "巳",
+      "order": 6,
+      "description": "A full clasp: every finger interlocked.",
+      "how_to": [
+        "Press your palms together.",
+        "Interlock all fingers and fold them over the backs of the hands.",
+        "Cross the thumbs and hold the clasp at chest height."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "lock",
+          "lock",
+          "lock",
+          "lock",
+          "lock"
+        ],
+        "right": [
+          "lock",
+          "lock",
+          "lock",
+          "lock",
+          "lock"
+        ],
+        "layout": "clasped",
+        "caption": "All fingers interlocked"
+      },
+      "recognition": {
+        "finger_weights": {
+          "lock": [
+            0.4,
+            0.8
+          ]
+        },
+        "rules": [
+          {
+            "feature": "palm_distance",
+            "label": "Palms pressed together",
+            "weight": 2.0,
+            "soft": 0.45,
+            "max": 0.7
+          },
+          {
+            "feature": "a.axis_up",
+            "label": "Hands upright",
+            "weight": 0.8,
+            "soft": 0.4,
+            "min": 0.3
+          },
+          {
+            "feature": "b.axis_up",
+            "label": "Hands upright",
+            "weight": 0.8,
+            "soft": 0.4,
+            "min": 0.3
+          }
+        ]
+      }
+    },
+    {
+      "id": "horse",
+      "name": "Horse",
+      "kanji": "午",
+      "order": 7,
+      "description": "Index fingers meet at the tips to form a peak.",
+      "how_to": [
+        "Curl the middle, ring and little fingers of both hands and press the knuckles together.",
+        "Extend both index fingers and touch the tips to make a triangle.",
+        "Rest the thumbs together below the peak, elbows slightly out."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "up",
+          "up",
+          "fold",
+          "fold",
+          "fold"
+        ],
+        "right": [
+          "up",
+          "up",
+          "fold",
+          "fold",
+          "fold"
+        ],
+        "layout": "peak",
+        "caption": "Index fingertips touch to form a triangle"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "tip_distance.index",
+            "label": "Index fingertips touch at the peak",
+            "weight": 1.5,
+            "soft": 0.4,
+            "max": 0.5
+          },
+          {
+            "feature": "palm_distance",
+            "label": "Palms apart below the peak",
+            "weight": 1.5,
+            "soft": 0.35,
+            "min": 0.95
+          },
+          {
+            "feature": "a.finger_up.index",
+            "label": "Index fingers point upward",
+            "weight": 0.6,
+            "soft": 0.4,
+            "min": 0.2
+          },
+          {
+            "feature": "b.finger_up.index",
+            "label": "Index fingers point upward",
+            "weight": 0.6,
+            "soft": 0.4,
+            "min": 0.2
+          }
+        ]
+      }
+    },
+    {
+      "id": "ram",
+      "name": "Ram",
+      "kanji": "未",
+      "order": 8,
+      "description": "Index and middle fingers of both hands raised together.",
+      "how_to": [
+        "Raise the index and middle fingers of both hands.",
+        "Press the raised fingers together, palms facing each other.",
+        "Curl the remaining fingers and tuck the thumbs in."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "fold",
+          "up",
+          "up",
+          "fold",
+          "fold"
+        ],
+        "right": [
+          "fold",
+          "up",
+          "up",
+          "fold",
+          "fold"
+        ],
+        "layout": "clasped",
+        "caption": "Index and middle fingers raised and pressed together"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "vertical_offset",
+            "label": "Hands side by side",
+            "weight": 1.5,
+            "soft": 0.4,
+            "max": 0.45
+          },
+          {
+            "feature": "tip_distance.index",
+            "label": "Raised fingers pressed together",
+            "weight": 1.2,
+            "soft": 0.5,
+            "max": 0.6
+          },
+          {
+            "feature": "palm_distance",
+            "label": "Hands close together",
+            "weight": 1.0,
+            "soft": 0.6,
+            "max": 1.4
+          }
+        ]
+      }
+    },
+    {
+      "id": "monkey",
+      "name": "Monkey",
+      "kanji": "申",
+      "order": 9,
+      "description": "Flat palms pressed together, laid horizontally.",
+      "how_to": [
+        "Hold your left hand flat with the palm facing up.",
+        "Lay your right hand flat on top, palm down.",
+        "Keep the fingers extended and pointing in opposite directions."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "up",
+          "up",
+          "up",
+          "up",
+          "up"
+        ],
+        "right": [
+          "up",
+          "up",
+          "up",
+          "up",
+          "up"
+        ],
+        "layout": "stacked",
+        "caption": "Flat palms stacked, right over left"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "a.horizontal",
+            "label": "Hands lie flat (horizontal)",
+            "weight": 1.2,
+            "soft": 0.3,
+            "min": 0.7
+          },
+          {
+            "feature": "b.horizontal",
+            "label": "Hands lie flat (horizontal)",
+            "weight": 1.2,
+            "soft": 0.3,
+            "min": 0.7
+          },
+          {
+            "feature": "axis_alignment",
+            "label": "Fingers point in opposite directions",
+            "weight": 1.5,
+            "soft": 0.4,
+            "max": -0.5
+          },
+          {
+            "feature": "palm_distance",
+            "label": "Palms stacked",
+            "weight": 1.0,
+            "soft": 0.5,
+            "max": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "bird",
+      "name": "Bird",
+      "kanji": "酉",
+      "order": 10,
+      "description": "A beak made from the index and little fingers.",
+      "how_to": [
+        "Interlock the middle and ring fingers of both hands inward.",
+        "Extend the index fingers and touch their tips.",
+        "Extend the little fingers and touch their tips, thumbs together."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "up",
+          "up",
+          "lock",
+          "lock",
+          "up"
+        ],
+        "right": [
+          "up",
+          "up",
+          "lock",
+          "lock",
+          "up"
+        ],
+        "layout": "peak",
+        "caption": "Index and little fingertips touch, middle fingers locked"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "tip_distance.index",
+            "label": "Index fingertips touch",
+            "weight": 1.2,
+            "soft": 0.4,
+            "max": 0.55
+          },
+          {
+            "feature": "tip_distance.pinky",
+            "label": "Little fingertips touch",
+            "weight": 1.2,
+            "soft": 0.45,
+            "max": 0.6
+          },
+          {
+            "feature": "palm_distance",
+            "label": "Hands close together",
+            "weight": 0.8,
+            "soft": 0.6,
+            "max": 1.3
+          }
+        ]
+      }
+    },
+    {
+      "id": "dog",
+      "name": "Dog",
+      "kanji": "戌",
+      "order": 11,
+      "description": "An open palm resting on a closed fist.",
+      "how_to": [
+        "Make a fist with your right hand.",
+        "Lay your left hand flat on top of the fist, palm down.",
+        "Keep the left fingers together and extended."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "up",
+          "up",
+          "up",
+          "up",
+          "up"
+        ],
+        "right": [
+          "fold",
+          "fold",
+          "fold",
+          "fold",
+          "fold"
+        ],
+        "layout": "stacked",
+        "caption": "Flat left palm resting on the right fist"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "a_above_b",
+            "label": "Flat hand rests on top of the fist",
+            "weight": 1.5,
+            "soft": 0.35,
+            "min": 0.2
+          },
+          {
+            "feature": "a.horizontal",
+            "label": "Flat hand lies horizontally",
+            "weight": 1.0,
+            "soft": 0.3,
+            "min": 0.6
+          },
+          {
+            "feature": "palm_distance",
+            "label": "Hands touching",
+            "weight": 1.0,
+            "soft": 0.6,
+            "max": 1.4
+          }
+        ]
+      }
+    },
+    {
+      "id": "boar",
+      "name": "Boar",
+      "kanji": "亥",
+      "order": 12,
+      "description": "Both fists turned down with the knuckles pressed together.",
+      "how_to": [
+        "Curl the fingers of both hands.",
+        "Turn the hands so the knuckles point down and the wrists bend outward.",
+        "Press the knuckles of both hands together."
+      ],
+      "hands_required": 2,
+      "diagram": {
+        "left": [
+          "fold",
+          "fold",
+          "fold",
+          "fold",
+          "fold"
+        ],
+        "right": [
+          "fold",
+          "fold",
+          "fold",
+          "fold",
+          "fold"
+        ],
+        "layout": "knuckles",
+        "caption": "Knuckles pressed together, fingers pointing down"
+      },
+      "recognition": {
+        "rules": [
+          {
+            "feature": "a.axis_up",
+            "label": "Knuckles turned downward",
+            "weight": 1.2,
+            "soft": 0.4,
+            "max": -0.15
+          },
+          {
+            "feature": "b.axis_up",
+            "label": "Knuckles turned downward",
+            "weight": 1.2,
+            "soft": 0.4,
+            "max": -0.15
+          },
+          {
+            "feature": "knuckle_distance",
+            "label": "Knuckles pressed together",
+            "weight": 1.5,
+            "soft": 0.5,
+            "max": 0.8
+          }
+        ]
+      }
+    }
+  ]
+}

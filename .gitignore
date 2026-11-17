@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Generated / downloaded assets
+frontend/public/mediapipe/
+frontend/public/models/
+
+# Local data: your recordings, trained model and game history
+backend/dataset/*
+!backend/dataset/.gitkeep
+backend/trained_models/*
+!backend/trained_models/.gitkeep
+backend/data/
+
+# Environment
+.env
+*.local
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

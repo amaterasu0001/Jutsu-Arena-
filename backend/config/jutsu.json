@@ -1,0 +1,125 @@
+{
+  "_comment": "Game-defined jutsu and sign sequences. These are original game configurations, not canonical sequences from any series. Edit freely (or use the editor in the Jutsu Library). Rules: 1-6 signs (a single sign works only if no other sequence starts with it), no sequence may be the beginning of another, no sign twice in a row.",
+  "jutsu": [
+    {
+      "id": "fireball",
+      "name": "Fireball Jutsu",
+      "subtitle": "Fire Style",
+      "element": "fire",
+      "difficulty": "Beginner",
+      "points": 100,
+      "effect": "fireball",
+      "description": "Gather heat behind the breath and release it as a roaring sphere of flame that swells as it travels.",
+      "sequence": [
+        "tiger",
+        "snake",
+        "ram"
+      ]
+    },
+    {
+      "id": "water_style",
+      "name": "Water Style",
+      "subtitle": "Rising Tide",
+      "element": "water",
+      "difficulty": "Beginner",
+      "points": 100,
+      "effect": "water",
+      "description": "Draw moisture from the air into a surging wave that crashes across the arena and breaks into spray.",
+      "sequence": [
+        "rat",
+        "tiger",
+        "snake"
+      ]
+    },
+    {
+      "id": "shadow_clone",
+      "name": "Shadow Clone Jutsu",
+      "subtitle": "Many From One",
+      "element": "shadow",
+      "difficulty": "Beginner",
+      "points": 120,
+      "effect": "clone",
+      "description": "Freeze the moment and split into smoke-born doubles of yourself: the clones are copied from your live camera image the instant you form Ram.",
+      "sequence": [
+        "ram"
+      ],
+      "requires_person": true
+    },
+    {
+      "id": "transformation",
+      "name": "Transformation Jutsu",
+      "subtitle": "Change of Form",
+      "element": "illusion",
+      "difficulty": "Beginner",
+      "points": 120,
+      "effect": "transform",
+      "description": "Vanish inside a burst of shimmering smoke and re-emerge wearing a different shape.",
+      "sequence": [
+        "dog",
+        "boar",
+        "ram"
+      ]
+    },
+    {
+      "id": "lightning_style",
+      "name": "Lightning Style",
+      "subtitle": "Storm Lance",
+      "element": "lightning",
+      "difficulty": "Intermediate",
+      "points": 160,
+      "effect": "lightning",
+      "description": "Charge the air until it splits, sending jagged bolts racing down in a series of blinding flashes.",
+      "sequence": [
+        "ox",
+        "rabbit",
+        "monkey"
+      ]
+    },
+    {
+      "id": "wind_style",
+      "name": "Wind Style",
+      "subtitle": "Cutting Gale",
+      "element": "wind",
+      "difficulty": "Intermediate",
+      "points": 160,
+      "effect": "wind",
+      "description": "Compress a gust into ribbons of slicing air that sweep the arena in a tightening spiral.",
+      "sequence": [
+        "bird",
+        "horse",
+        "dragon"
+      ]
+    },
+    {
+      "id": "earth_style",
+      "name": "Earth Style",
+      "subtitle": "Stone Rampart",
+      "element": "earth",
+      "difficulty": "Intermediate",
+      "points": 160,
+      "effect": "earth",
+      "description": "Strike the ground with your will and raise a wall of jagged stone pillars from beneath the dust.",
+      "sequence": [
+        "boar",
+        "dog",
+        "ox"
+      ]
+    },
+    {
+      "id": "spiral_sphere",
+      "name": "Spiral Sphere",
+      "subtitle": "Rasengan-style Energy Attack",
+      "element": "energy",
+      "difficulty": "Advanced",
+      "points": 240,
+      "effect": "sphere",
+      "description": "Spin raw energy into a dense, howling sphere, hold it steady in orbiting light, then let it burst outward.",
+      "sequence": [
+        "monkey",
+        "dragon",
+        "rat",
+        "bird"
+      ]
+    }
+  ]
+}

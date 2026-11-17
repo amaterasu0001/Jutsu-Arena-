@@ -1,0 +1,134 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource/chakra-petch/500.css';
+@import '@fontsource/chakra-petch/600.css';
+@import '@fontsource/chakra-petch/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Design tokens. The accent follows the selected theme; everything else in the
+   palette is fixed so the three themes stay recognisably the same product.
+--------------------------------------------------------------------------- */
+:root {
+  --accent: 226 59 78; /* crimson */
+  --accent-soft: 255 122 136;
+  --accent-deep: 122 18 32;
+  color-scheme: dark;
+}
+
+:root[data-theme='azure'] {
+  --accent: 62 166 255;
+  --accent-soft: 140 203 255;
+  --accent-deep: 12 62 122;
+}
+
+:root[data-theme='violet'] {
+  --accent: 139 92 246;
+  --accent-soft: 186 160 255;
+  --accent-deep: 56 28 130;
+}
+
+@layer base {
+  html {
+    @apply bg-ink-950 text-fg antialiased;
+    font-family: theme('fontFamily.sans');
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen bg-ink-950;
+    background-image:
+      radial-gradient(1100px 520px at 12% -8%, rgb(var(--accent) / 0.1), transparent 62%),
+      radial-gradient(900px 520px at 96% 4%, rgb(62 166 255 / 0.07), transparent 60%),
+      radial-gradient(900px 640px at 50% 112%, rgb(139 92 246 / 0.08), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: theme('fontFamily.display');
+    @apply tracking-wide;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.4);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent-soft));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.ink.500') transparent;
+  }
+}
+
+@layer components {
+  /* Glass panel: the base surface for every card in the app. */
+  .panel {
+    @apply relative rounded-2xl border border-white/[0.07] bg-ink-800/70 shadow-panel backdrop-blur-md;
+  }
+
+  .panel-hover {
+    @apply transition duration-300 hover:border-accent/40 hover:shadow-glow;
+  }
+
+  /* Small uppercase label used above headings and in HUD read-outs. */
+  .eyebrow {
+    @apply font-display text-[11px] font-semibold uppercase tracking-[0.22em] text-fg-faint;
+  }
+
+  .hud-value {
+    @apply font-display font-semibold tabular-nums tracking-wide;
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, #fff 0%, rgb(var(--accent-soft)) 45%, #8cc8ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Angled corner cut used on primary buttons and the camera stage. */
+  .clip-corners {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
+  }
+
+  .grid-backdrop {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-xl bg-white/[0.04];
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/[0.06] to-transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
